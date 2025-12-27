@@ -2,7 +2,7 @@ from flask import request
 from flask.views import MethodView
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_smorest import Blueprint, abort
-
+from apispec.ext.marshmallow import MarshmallowPlugin
 from app.extensions import db
 from app.models.pet import Pet
 from app.schemas.pet_schema import PetSchema

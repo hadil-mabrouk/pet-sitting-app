@@ -11,3 +11,7 @@ class RequestStatus(Enum):
     ACCEPTED = "ACCEPTED"
     IN_PROGRESS = "IN_PROGRESS"
     COMPLETED = "COMPLETED"
+class OfferStatus(Enum):
+    PENDING = "PENDING"
+    ACCEPTED = "ACCEPTED"
+    REJECTED = "REJECTED"
