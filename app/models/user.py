@@ -23,6 +23,11 @@ class User(db.Model):
 
     phone_number = db.Column(db.String(20))
 
+    email_verified = db.Column(db.Boolean, nullable=False, default=False, server_default="false")
+    email_verification_code = db.Column(db.String(6))
+    email_verification_expires_at = db.Column(db.DateTime(timezone=True))
+    email_verification_last_sent_at = db.Column(db.DateTime(timezone=True))
+
     city = db.Column(
         db.Enum(
             "Tunis",

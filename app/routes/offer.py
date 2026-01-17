@@ -10,6 +10,12 @@ from app.models.enum import OfferStatus, RequestStatus
 from app.models.service_request import ServiceRequest
 from app.schemas.offer_schema import OfferCreateSchema, OfferSchema
 from app.utils.roles import role_required
+from app.models.booking import Booking
+from app.models.enum import BookingStatus
+from datetime import datetime
+from app.models.service_type import ServiceType
+
+from app.models import offer
 
 offers_bp = Blueprint(
     "offers",
@@ -39,10 +45,20 @@ class OffersOnRequest(MethodView):
         if existing:
             abort(409, message="You already made an offer for this request")
 
+        # Price floor: must be >= requested price and >= service type min_price
+        requested_price = Decimal(str(req.requested_price))
+        offered_price = Decimal(str(data["offered_price"]))
+        svc = ServiceType.query.get(req.service_type_id)
+        min_price = Decimal(str(svc.min_price)) if svc and svc.min_price is not None else Decimal("0")
+        if offered_price < requested_price:
+            abort(400, message="Offered price must be at least the requested price")
+        if offered_price < min_price:
+            abort(400, message="Offered price must be at least the minimum for this service type")
+
         offer = Offer(
             request_id=request_id,
             sitter_id=sitter_id,
-            offered_price=Decimal(str(data["offered_price"])),
+            offered_price=offered_price,
             message=data.get("message"),
             status=OfferStatus.PENDING.value
         )
@@ -112,7 +128,21 @@ class AcceptOffer(MethodView):
             Offer.id != offer.id,
             Offer.status == OfferStatus.PENDING.value
         ).update({"status": OfferStatus.REJECTED.value})
+        # create booking if not exists
+        existing_booking = Booking.query.filter_by(request_id=req.id).first()
+        if existing_booking:
+            abort(409, message="Booking already exists for this request")
 
+        booking = Booking(
+            request_id=req.id,
+            offer_id=offer.id,
+            owner_id=req.owner_id,
+            sitter_id=offer.sitter_id,
+            agreed_price=offer.offered_price,
+            status=BookingStatus.ACTIVE.value,
+        )
+
+        db.session.add(booking)
         db.session.commit()
         return offer
 
@@ -143,4 +173,5 @@ class RejectOffer(MethodView):
 
         offer.status = OfferStatus.REJECTED.value
         db.session.commit()
+        
         return offer

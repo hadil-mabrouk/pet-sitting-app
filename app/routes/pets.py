@@ -22,7 +22,8 @@ class PetsListResource(MethodView):
     @jwt_required()
     @pets_bp.response(200, PetSchema(many=True))
     def get(self):
-        pets = Pet.query.all()
+        owner_id = int(get_jwt_identity())
+        pets = Pet.query.filter_by(owner_id=owner_id).all()
         return pets
 
     @jwt_required()

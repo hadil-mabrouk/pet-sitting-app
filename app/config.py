@@ -18,3 +18,13 @@ class Config:
     OPENAPI_URL_PREFIX = "/docs"
     OPENAPI_SWAGGER_UI_PATH = "/swagger"
     OPENAPI_SWAGGER_UI_URL = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+
+    MAIL_SERVER = "smtp.gmail.com"
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = os.getenv("GMAIL_USER")
+    MAIL_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
+    MAIL_DEFAULT_SENDER = MAIL_USERNAME
+    UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER", os.path.join(os.path.dirname(__file__), "..", "uploads"))
+SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = False  # ok for local HTTP; in prod use True+HTTPS

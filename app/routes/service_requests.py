@@ -20,6 +20,21 @@ service_requests_bp = Blueprint(
     description="Service requests operations"
 )
 
+@service_requests_bp.route("/types")
+class ServiceTypes(MethodView):
+    @service_requests_bp.response(200)
+    def get(self):
+        types = ServiceType.query.order_by(ServiceType.id.asc()).all()
+        return [
+            {
+                "id": st.id,
+                "name": st.name,
+                "min_price": float(st.min_price) if st.min_price is not None else None,
+                "description": st.description,
+            }
+            for st in types
+        ]
+
 @service_requests_bp.route("")
 class ServiceRequestsCollection(MethodView):
 
