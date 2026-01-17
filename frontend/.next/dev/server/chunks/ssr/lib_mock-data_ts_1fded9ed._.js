@@ -1,0 +1,222 @@
+module.exports = [
+"[project]/lib/mock-data.ts [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "mockBookings",
+    ()=>mockBookings,
+    "mockOffers",
+    ()=>mockOffers,
+    "mockRequests",
+    ()=>mockRequests,
+    "mockSitters",
+    ()=>mockSitters
+]);
+const mockRequests = [
+    {
+        id: "r1",
+        ownerId: "o1",
+        ownerName: "Ahmed Ben Ali",
+        ownerAvatar: "/thoughtful-man-portrait.png",
+        petId: "p1",
+        petName: "Caramel",
+        petType: "dog",
+        petImage: "/golden-retriever.png",
+        serviceType: "sitting",
+        location: {
+            lat: 36.8189,
+            lng: 10.1658,
+            address: "La Marsa, Tunis"
+        },
+        dateStart: "2024-01-15T09:00:00",
+        dateEnd: "2024-01-17T18:00:00",
+        offeredPrice: 45,
+        status: "open",
+        createdAt: "2024-01-12T10:30:00",
+        description: "Need someone to take care of my golden retriever for 3 days while I'm traveling."
+    },
+    {
+        id: "r2",
+        ownerId: "o2",
+        ownerName: "Fatma Trabelsi",
+        ownerAvatar: "/woman-portrait.png",
+        petId: "p2",
+        petName: "Minou",
+        petType: "cat",
+        petImage: "/fluffy-persian-cat.png",
+        serviceType: "sitting",
+        location: {
+            lat: 36.8324,
+            lng: 10.2357,
+            address: "Sidi Bou Said, Tunis"
+        },
+        dateStart: "2024-01-14T08:00:00",
+        dateEnd: "2024-01-14T20:00:00",
+        offeredPrice: 25,
+        status: "open",
+        createdAt: "2024-01-12T14:15:00"
+    },
+    {
+        id: "r3",
+        ownerId: "o3",
+        ownerName: "Karim Mansour",
+        ownerAvatar: "/young-man-contemplative.png",
+        petId: "p3",
+        petName: "Rocky",
+        petType: "dog",
+        petImage: "/majestic-german-shepherd.png",
+        serviceType: "walking",
+        location: {
+            lat: 36.7992,
+            lng: 10.1802,
+            address: "Centre Ville, Tunis"
+        },
+        dateStart: "2024-01-13T07:00:00",
+        dateEnd: "2024-01-13T08:00:00",
+        offeredPrice: 15,
+        status: "open",
+        createdAt: "2024-01-12T16:45:00"
+    },
+    {
+        id: "r4",
+        ownerId: "o4",
+        ownerName: "Leila Hamdi",
+        ownerAvatar: "/professional-woman-diverse.png",
+        petId: "p4",
+        petName: "Coco",
+        petType: "bird",
+        petImage: "/parrot-bird.jpg",
+        serviceType: "taxi",
+        location: {
+            lat: 36.8456,
+            lng: 10.1973,
+            address: "Carthage, Tunis"
+        },
+        dateStart: "2024-01-14T10:00:00",
+        dateEnd: "2024-01-14T11:00:00",
+        offeredPrice: 20,
+        status: "open",
+        createdAt: "2024-01-12T18:00:00",
+        description: "Need to transport my parrot to the vet in La Marsa."
+    }
+];
+const mockOffers = [
+    {
+        id: "of1",
+        requestId: "r1",
+        sitterId: "s1",
+        sitterName: "Sarah Mitchell",
+        sitterAvatar: "/woman-dog-lover.jpg",
+        sitterTrustScore: 4.8,
+        sitterReviewCount: 47,
+        offeredPrice: 45,
+        message: "I'd love to take care of Caramel! I have experience with golden retrievers.",
+        distance: 1.2,
+        status: "pending",
+        createdAt: "2024-01-12T11:00:00"
+    },
+    {
+        id: "of2",
+        requestId: "r1",
+        sitterId: "s2",
+        sitterName: "Mohamed Khelifi",
+        sitterAvatar: "/man-pets.jpg",
+        sitterTrustScore: 4.5,
+        sitterReviewCount: 23,
+        offeredPrice: 40,
+        message: "Available and ready to help!",
+        distance: 2.5,
+        status: "pending",
+        createdAt: "2024-01-12T11:30:00"
+    },
+    {
+        id: "of3",
+        requestId: "r1",
+        sitterId: "s3",
+        sitterName: "Amira Bouazizi",
+        sitterAvatar: "/young-woman-smile.jpg",
+        sitterTrustScore: 4.9,
+        sitterReviewCount: 62,
+        offeredPrice: 50,
+        message: "Professional pet sitter, your pet will be in great hands!",
+        distance: 0.8,
+        status: "pending",
+        createdAt: "2024-01-12T12:00:00"
+    }
+];
+const mockBookings = [
+    {
+        id: "b1",
+        requestId: "r5",
+        offerId: "of5",
+        ownerId: "1",
+        sitterId: "s1",
+        sitterName: "Sarah Mitchell",
+        sitterAvatar: "/woman-dog-lover.jpg",
+        petName: "Max",
+        petType: "dog",
+        serviceType: "sitting",
+        location: {
+            lat: 36.8065,
+            lng: 10.1815,
+            address: "Tunis, Tunisia"
+        },
+        dateStart: "2024-01-10T09:00:00",
+        dateEnd: "2024-01-12T18:00:00",
+        price: 60,
+        status: "in-progress",
+        updates: [
+            {
+                id: "u1",
+                timestamp: "2024-01-10T10:00:00",
+                message: "Max arrived safely! He's settling in nicely.",
+                image: "/happy-dog-playing.jpg"
+            },
+            {
+                id: "u2",
+                timestamp: "2024-01-11T15:30:00",
+                message: "Had a great walk in the park today! Max loves playing fetch.",
+                image: "/dog-in-park.png"
+            }
+        ]
+    }
+];
+const mockSitters = [
+    {
+        id: "s1",
+        name: "Sarah Mitchell",
+        avatar: "/woman-dog-lover.jpg",
+        trustScore: 4.8,
+        reviewCount: 47,
+        location: {
+            lat: 36.812,
+            lng: 10.17
+        }
+    },
+    {
+        id: "s2",
+        name: "Mohamed Khelifi",
+        avatar: "/man-pets.jpg",
+        trustScore: 4.5,
+        reviewCount: 23,
+        location: {
+            lat: 36.82,
+            lng: 10.185
+        }
+    },
+    {
+        id: "s3",
+        name: "Amira Bouazizi",
+        avatar: "/young-woman-smile.jpg",
+        trustScore: 4.9,
+        reviewCount: 62,
+        location: {
+            lat: 36.805,
+            lng: 10.16
+        }
+    }
+];
+}),
+];
+
+//# sourceMappingURL=lib_mock-data_ts_1fded9ed._.js.map

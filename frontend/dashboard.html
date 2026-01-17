@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PetCare | My Pets</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h2>🐾 My Pets</h2>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<main>
+  <section class="pets-grid" id="petsGrid"></section>
+
+  <div class="card add-pet">
+    <h3>Add Pet</h3>
+    <input id="name" placeholder="Name">
+    <input id="species" placeholder="Species">
+    <input id="age" type="number" placeholder="Age">
+    <button onclick="addPet()">Add</button>
+  </div>
+</main>
+
+<script src="js/pets.js"></script>
+</body>
+</html>

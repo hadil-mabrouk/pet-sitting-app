@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: pet_sitting_db
+    restart: always
+    environment:
+      POSTGRES_DB: pet_sitting_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Flask Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pet_sitting_backend
+    restart: always
+    env_file:
+      - ./backend/.env  # includes Google OAuth, mail, JWT, DB vars
+    environment:
+      DATABASE_URL: postgresql://postgres:12345@db:5432/pet_sitting_dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/venv  # Prevent venv from being mounted
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+        echo 'Waiting for database...' &&
+        sleep 5 &&
+        flask db upgrade &&
+        python app.py
+      "
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pet_sitting_frontend
+    restart: always
+    environment:
+      NODE_ENV: production
+      BACKEND_ORIGIN: http://backend:5000
+      NEXT_PUBLIC_API_BASE_URL: /api
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+    
+
+# Persistent volumes
+volumes:
+  postgres_data:
+    driver: local

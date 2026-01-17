@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #f2e8d5; /* sand */
+  --foreground: #3a3a3a; /* dark brown */
+  --card: #ffffff;
+  --card-foreground: #3a3a3a;
+  --popover: #ffffff;
+  --popover-foreground: #3a3a3a;
+  --primary: #c65a3a; /* terracotta */
+  --primary-foreground: #ffffff;
+  --secondary: #f7f1e6; /* soft beige */
+  --secondary-foreground: #3a3a3a;
+  --muted: #e9ddc8;
+  --muted-foreground: #4f4a45;
+  --accent: #6b8e4e; /* olive */
+  --accent-foreground: #ffffff;
+  --destructive: #d8514f;
+  --destructive-foreground: #ffffff;
+  --border: #e2d7c4;
+  --input: #e2d7c4;
+  --ring: #c65a3a;
+  --radius: 14px;
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body), "Inter", system-ui, -apple-system, sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  h1 { font-size: var(--text-5xl); }
+  h2 { font-size: var(--text-3xl); }
+  h3 { font-size: var(--text-2xl); }
+  h4 { font-size: var(--text-xl); }
+  button {
+    transition: all 0.3s ease;
+  }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-soft);
+}
+
+@layer utilities {
+  .bg-background {
+    background-color: var(--background);
+  }
+  .text-foreground {
+    color: var(--foreground);
+  }
+  .bg-card {
+    background-color: var(--card);
+  }
+  .text-card {
+    color: var(--card-foreground);
+  }
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  .text-primary {
+    color: var(--primary);
+  }
+  .text-primary-foreground {
+    color: var(--primary-foreground);
+  }
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+  .text-secondary-foreground {
+    color: var(--secondary-foreground);
+  }
+  .bg-accent {
+    background-color: var(--accent);
+  }
+  .text-accent {
+    color: var(--accent);
+  }
+  .text-accent-foreground {
+    color: var(--accent-foreground);
+  }
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+  .text-primary {
+    color: var(--primary);
+  }
+  .border-border {
+    border-color: var(--border);
+  }
+  .outline-ring\/50 {
+    outline-color: color-mix(in srgb, var(--ring) 50%, transparent);
+  }
+}
