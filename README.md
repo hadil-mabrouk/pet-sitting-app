@@ -56,8 +56,3 @@ Service marketplace logic
 
 This project is intended for academic and educational use.
 
-<div align="center">
-
-✨ Built with care for pets and clean architecture ✨
-
-</div>
